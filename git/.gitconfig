@@ -1,0 +1,5 @@
+[commit]
+	template = ~/.gitmessage
+[user]
+	name = Matthias Paulmier
+	email = mpaulmier@gmx.fr
