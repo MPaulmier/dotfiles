@@ -607,7 +607,7 @@ globalkeys = gears.table.join(
         function () awful.spawn(editor) end,
         {description = "Emacs", group = "applications"}),
     awful.key({ modkey,           }, "b",
-        function () awful.spawn(browser) end,
+        function () awful.spawn.raise_or_spawn(browser) end,
         {description = "Firefox", group = "applications"}),
     awful.key({ modkey,           }, "l",
         function () awful.spawn("libreoffice") end,
@@ -616,11 +616,8 @@ globalkeys = gears.table.join(
         function () awful.spawn("thunar") end,
         {description = "Thunar", group = "applications"}),
     awful.key({                   }, "Print",
-        function() awful.util.spawn("screengrab") end,
-        {description = "Print screen", group = "controls"}),
-    awful.key({ modkey, "Shift"   }, "x",
-        function () awful.spawn("lxappearance") end,
-        {description = "Lxappearance", group = "applications"})
+        function() awful.spawn("screengrab") end,
+        {description = "Print screen", group = "controls"})
 )
 
 clientkeys = gears.table.join(
