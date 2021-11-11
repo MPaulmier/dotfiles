@@ -1,5 +1,3 @@
--- Possible color palette : #272343 #34a3a3 #bae8e8 #e3f6f5 #fafafa
-
 -- A lot of this config was taken from here :
 -- https://github.com/wimstefan/dotfiles/blob/master/config/awesome/rc.lua
 
@@ -326,7 +324,7 @@ local tooltip_bat = awful.tooltip({
 })
 
 -- Re-set wallpaper when a screen's geometry changes (e.g. different resolution)
-screen.connect_signal("property::wallpaper", function(s)
+screen.connect_signal("request::wallpaper", function(s)
         awful.wallpaper {
             screen = s,
             widget = {
