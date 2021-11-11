@@ -137,7 +137,7 @@ menubar.geometry.width = 1400
 local spr = wibox.widget.textbox('<span color="' .. beautiful.border_focus .. '" weight="bold"> │ </span>')
 
 -- Create a textclock widget
-mytextclock = wibox.widget.textclock()
+mytextclock = wibox.widget.textclock('%A %d %B, %H:%M')
 
 -- ALSA volume bar
 local icon_alsa = wibox.widget.textbox()
