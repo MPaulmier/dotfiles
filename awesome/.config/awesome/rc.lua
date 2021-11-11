@@ -825,16 +825,6 @@ client.connect_signal("request::manage", function (c, ctx)
         end
 end)
 
-client.connect_signal("request::activate", function (c, ctx)
-        local geo = c:geometry()
-        if ctx == "client.focus.byidx" then
-            mouse.coords {
-                x = geo.x + math.ceil(geo.width /2),
-                y = geo.y + math.ceil(geo.height/2)
-            }
-        end
-end)
-
 -- Enable sloppy focus, so that focus follows mouse.
 client.connect_signal("mouse::enter", function(c)
     c:activate { context = "mouse_enter", raise = false }
