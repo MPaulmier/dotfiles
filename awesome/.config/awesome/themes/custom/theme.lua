@@ -8,8 +8,7 @@ local gfs = require("gears.filesystem")
 theme      = {}
 
 -- Theme settings {{{
-theme.wallpaper1               = wall_dir .. "/wall.jpg"
-theme.wallpaper2               = wall_dir .. "/wall.jpg"
+theme.wallpaper                = wall_dir .. "/wall.jpg"
 theme.border_width             = dpi(3)
 theme.menu_height              = dpi(16)
 theme.menu_width               = dpi(128)
