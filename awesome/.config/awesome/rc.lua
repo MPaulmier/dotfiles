@@ -135,6 +135,7 @@ menubar.geometry.width = 1400
 -- {{{ Wibar
 
 local spr = wibox.widget.textbox('<span color="' .. beautiful.border_focus .. '" weight="bold"> │ </span>')
+local _end = wibox.widget.textbox('<span> </span>')
 
 -- Create a textclock widget
 mytextclock = wibox.widget.textclock('%A %d %B, %H:%M')
@@ -410,7 +411,8 @@ screen.connect_signal("request::desktop_decoration", function(s)
             position = "top",
             screen = s,
             widget = wibox.container.margin,
-            margins = 10,
+            margins = 5,
+            height = 20,
             widget = {
                 layout = wibox.layout.align.horizontal,
                 { -- Left widgets
@@ -423,6 +425,7 @@ screen.connect_signal("request::desktop_decoration", function(s)
                 { -- Right widgets
                     layout = wibox.layout.fixed.horizontal,
                     wibox.widget.systray(),
+                    spr,
                     icon_alsa,
                     widget_alsa,
                     spr,
@@ -435,6 +438,7 @@ screen.connect_signal("request::desktop_decoration", function(s)
                     widget_power,
                     spr,
                     mytextclock,
+                    _end,
                 },
             }
         }
