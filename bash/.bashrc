@@ -9,8 +9,6 @@ export LC_ALL="fr_FR.UTF-8"
 export LC_CTYPE="fr_FR.UTF-8"
 export NAME="Matthias Paulmier"
 
-export PATH=$PATH:$HOME/.bin/
-
 # Aliases
 alias less="less -R"
 alias grep="grep --color=auto"
@@ -102,13 +100,6 @@ fi
 
 # colored GCC warnings and errors
 export GCC_COLORS='error=01;31:warning=01;35:note=01;36:caret=01;32:locus=01:quote=01'
-
-export PATH="/home/matt/.pyenv/bin:$PATH"
-export N_PREFIX="$HOME/n"; [[ :$PATH: == *":$N_PREFIX/bin:"* ]] || PATH+=":$N_PREFIX/bin"  # Added by n-install (see http://git.io/n-install-repo).
-
 # Pyenv
-export PATH="/home/matt/.pyenv/bin:$PATH"
 eval "$(pyenv init -)"
 eval "$(pyenv virtualenv-init -)"
-
-eval "$(direnv hook bash)"
