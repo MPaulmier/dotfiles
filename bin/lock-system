@@ -8,3 +8,5 @@ scrot "$TMPBG"
 convert "$TMPBG" -blur 2x10 "$TMPBG"
 
 i3lock -i "$TMPBG" && systemctl suspend
+
+rm -f "$TMPBG"
