@@ -1,0 +1,10 @@
+#!/usr/bin/env bash
+
+TMPBG='/tmp/screen.png'
+RES=1920x1080
+
+scrot "$TMPBG"
+
+convert "$TMPBG" -blur 2x10 "$TMPBG"
+
+i3lock -i "$TMPBG" && systemctl suspend

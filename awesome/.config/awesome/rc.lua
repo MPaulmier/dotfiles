@@ -498,7 +498,7 @@ awful.keyboard.append_global_keybindings {
         {description = "reload awesome", group = "awesome"}),
     awful.key({ modkey, "Shift"   }, "q", awesome.quit,
         {description = "quit awesome", group = "awesome"}),
-    awful.key({ modkey, "Shift"   }, "s", function () awful.spawn("systemctl suspend") end,
+    awful.key({ modkey, "Shift"   }, "s", function () awful.spawn("lock-system") end,
         {description = "suspend system", group = "awesome"}),
 
     awful.key({ modkey,           }, "l",     function () awful.tag.incmwfact( 0.05)          end,
@@ -858,4 +858,7 @@ end)
 -- {{{ Autostart
 awful.spawn.with_shell("killall compton")
 awful.spawn.with_shell("compton &")
+awful.spawn.with_shell("emacs --daemon")
+awful.spawn.with_shell("nm-applet")
+
 -- }}}
