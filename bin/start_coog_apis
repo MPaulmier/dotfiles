@@ -1,0 +1,20 @@
+#!/bin/bash
+run_yarn_window() {
+   local name="$1"
+   local pkg="$2"
+   urxvt -title "$name" -e /bin/bash -c "cd ${HOME}/coog_dev/workspace_coog_master/coog-portal ; yarn start:$pkg"
+}
+
+# Oof this is dirty
+echo "Killing all node processes, hope you did not become a web dev because this will fuck up everything..."
+killall -9 node
+
+for module in api api-referencial identity gateway ; do
+    echo "Starting $module in a new terminal"
+    run_yarn_window "yarn-$module" "$module" &
+done
+
+echo "Starting coog and api-v1"
+cd $HOME/coog_dev/workspace_coog_master
+coog server start
+coog api start
