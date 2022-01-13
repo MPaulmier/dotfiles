@@ -50,7 +50,7 @@ _PROMPT() {
 
 PROMPT_COMMAND=_PROMPT
 
-export PS2=">>>"
+export PS2=">>> "
 
 # Functions :
 # Extract any archive (may lack some file archive formats I don't use)
@@ -98,8 +98,10 @@ if ! shopt -oq posix; then
     fi
 fi
 
-# colored GCC warnings and errors
-export GCC_COLORS='error=01;31:warning=01;35:note=01;36:caret=01;32:locus=01:quote=01'
-# Pyenv
-eval "$(pyenv init -)"
-eval "$(pyenv virtualenv-init -)"
+if [ -d "$HOME/.pyenv" ]; then
+    # colored GCC warnings and errors
+    export GCC_COLORS='error=01;31:warning=01;35:note=01;36:caret=01;32:locus=01:quote=01'
+    # Pyenv
+    eval "$(pyenv init -)"
+    eval "$(pyenv virtualenv-init -)"
+fi
