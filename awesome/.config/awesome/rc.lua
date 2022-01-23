@@ -217,7 +217,7 @@ local widget_cpu = wibox.layout.fixed.horizontal()
 local widget_cpu_graph = wibox.widget.graph()
 local widget_cpu_text = lain.widget.cpu({
         settings = function()
-            widget:set_markup(markup.font(beautiful.icon_font, "&#62171;") .. markup.font(beautiful.font, "  " .. cpu_now.usage .. "% "))
+            widget:set_markup(markup.font(beautiful.icon_font, "&#62171;") .. markup.font(beautiful.font, "  " .. pad_to_length(cpu_now.usage, "100") .. "% "))
             widget_cpu_graph:add_value(cpu_now.usage/100)
         end
 })
