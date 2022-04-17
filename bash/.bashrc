@@ -43,12 +43,13 @@ _PROMPT() {
     _EXIT_STATUS=$?
     [ $_EXIT_STATUS != 0 ] && _EXIT_STATUS_STR=" \[\033[38;5;7m\][\[$(tput sgr0)\]\[\033[38;5;9m\]$_EXIT_STATUS\[$(tput sgr0)\]\[\033[38;5;7m\]]\[$(tput sgr0)\]"
 
-    VIRTUALENV=$(parse_virtualenv)
     PYENSTR=""
-    if [ "$VIRTUALENV" != "$(pyenv global)" ]; then
-        PYENVSTR="($VIRTUALENV)"
+    if [ -d .pyenv ]; then
+        VIRTUALENV=$(parse_virtualenv)
+        if [ "$VIRTUALENV" != "$(pyenv global)" ]; then
+            PYENVSTR="($VIRTUALENV)"
+        fi
     fi
-
     export PS1="$PYENVSTR\[$(tput bold)\]\[$(tput setaf 2)\][\[$(tput setaf 3)\]\u\[$(tput setaf 1)\]@\[$(tput setaf 3)\]\h \[$(tput setaf 6)\]\W\[$(tput setaf 2)\]]\[$(tput setaf 4)\]$(parse_git_branch)\\$ \[$(tput sgr0)\]"
 
     unset VIRTUALENV
