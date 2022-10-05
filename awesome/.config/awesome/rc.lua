@@ -45,8 +45,8 @@ end
 hostname = io.lines("/proc/sys/kernel/hostname")()
 TYPE = "laptop"
 BAT  = "BAT0"
-
-TEMPFILE = "/sys/devices/platform/coretemp.0/hwmon/hwmon2/temp2_input"
+-- TODO: This should be dependent on the system we are running on
+TEMPFILE = "/sys/devices/platform/coretemp.0/hwmon/hwmon7/temp2_input"
 
 home = os.getenv("HOME")
 -- Themes define colours, icons, font and wallpapers.
@@ -138,7 +138,7 @@ local spr = wibox.widget.textbox('<span color="' .. beautiful.border_focus .. '"
 local _end = wibox.widget.textbox('<span> </span>')
 
 -- Create a textclock widget
-mytextclock = wibox.widget.textclock('%A %d %B, %H:%M')
+mytextclock = wibox.widget.textclock('%A %d %B, %H:%M', 1)
 
 -- ALSA volume bar
 local icon_alsa = wibox.widget.textbox()
@@ -270,7 +270,7 @@ local widget_power = lain.widget.bat({
                 text    = "You can unplug the cable",
                 timeout = 15,
                 fg      = beautiful.green1,
-                bg      = beautiful.black2
+                bg      = beautiful.background
             }
 
             bat_notification_low_preset = {
@@ -278,14 +278,14 @@ local widget_power = lain.widget.bat({
                 text = "Plug the cable!",
                 timeout = nil,
                 fg = beautiful.red1,
-                bg = beautiful.black2
+                bg = beautiful.background
             }
             bat_notification_critical_preset = {
                 title = "Battery exhausted",
                 text = "Shutdown imminent",
                 timeout = 15,
-                fg = beautiful.white1,
-                bg = beautiful.black2
+                fg = beautiful.red2,
+                bg = beautiful.background
             }
         end
 })
@@ -326,11 +326,25 @@ local tooltip_bat = awful.tooltip({
 
 -- Re-set wallpaper when a screen's geometry changes (e.g. different resolution)
 screen.connect_signal("request::wallpaper", function(s)
+        local geo = s.geometry
+        local wall
+        if geo.width == 1920 then
+            wall = beautiful.wall_1920
+        elseif geo.width == 2560 then
+            wall = beautiful.wall_2560
+        elseif geo.width == 3440 then
+            wall = beautiful.wall_3440
+        else
+            naughty.notify { preset = naughty.config.presets.critical,
+                title = 'Error fetching wallpaper',
+                text = 'Could not find wallpaper for screen with width ' .. geo.width
+            }
+        end
         awful.wallpaper {
             screen = s,
             widget = {
                 {
-                    image     = beautiful.wallpaper,
+                    image     = wall,
                     upscale   = true,
                     downscale = true,
                     widget    = wibox.widget.imagebox,
@@ -358,7 +372,7 @@ screen.connect_signal("request::desktop_decoration", function(s)
         )
 
         -- Create a promptbox for each screen
-        s.mypromptbox = awful.widget.prompt()
+        s.mypromptbox = awful.widget.prompt { with_shell = true }
         -- Create an imagebox widget which will contain an icon indicating which layout we're using.
         -- We need one layoutbox per screen.
         s.mylayoutbox = awful.widget.layoutbox {
@@ -548,7 +562,7 @@ awful.keyboard.append_global_keybindings {
                 exe_callback = function (s)
                     os.execute("firefox --new-tab https://support.coopengo.com/issues/" .. s)
                 end,
-                history_patch = awful.util.get_cache_dir() .. "/history_issues"
+                history_path = awful.util.get_cache_dir() .. "/history_issues"
             }
         end,
         {desciption = "search for issue in coog's redmine", group = "awersome"}),
@@ -600,7 +614,7 @@ awful.keyboard.append_global_keybindings {
         function () awful.spawn("thunar") end,
         {description = "Thunar", group = "applications"}),
     awful.key({                   }, "Print",
-        function() awful.spawn("screengrab") end,
+        function() awful.spawn("flameshot gui") end,
         {description = "Print screen", group = "controls"}),
 }
 
@@ -849,9 +863,9 @@ end)
 -- }}}
 
 -- {{{ Autostart
-awful.spawn.with_shell("killall compton")
-awful.spawn.with_shell("compton &")
-awful.spawn.with_shell("emacs --daemon")
-awful.spawn.with_shell("nm-applet")
-
+awful.spawn("killall compton")
+awful.spawn("compton")
+awful.spawn("emacs --daemon")
+awful.spawn("nm-applet")
+awful.spawn("blueman-applet")
 -- }}}

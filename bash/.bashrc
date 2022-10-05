@@ -18,8 +18,8 @@ alias la="l -A"
 alias lla="ll -A"
 alias mkdir="mkdir -p"
 alias tree="tree -C"
-# Ring a bell both audio and visual
-alias ding="paplay /usr/share/sounds/freedesktop/stereo/complete.oga; echo -ne \"\007\""
+# Make terminal urgent
+alias u="echo -ne \"\007\""
 alias rpdb="rlwrap nc 0 4444"
 
 # Prompt (from <http://dotshare.it/dots/1143/>)

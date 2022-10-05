@@ -1,15 +1,19 @@
-local theme_assets = require("beautiful.theme_assets")
-local xresources = require("beautiful.xresources")
-local dpi = xresources.apply_dpi
-local xrdb = xresources.get_current_theme ()
+local theme_assets             = require("beautiful.theme_assets")
+local xresources               = require("beautiful.xresources")
+local dpi                      = xresources.apply_dpi
+local xrdb                     = xresources.get_current_theme ()
 
-local gfs = require("gears.filesystem")
+local gfs                      = require("gears.filesystem")
 
-theme      = {}
+theme                          = {}
 
 -- Theme settings {{{
-theme.wallpaper                = wall_dir .. "/wall.jpg"
+theme.wall_1920                = wall_dir .. '/wall_1920.jpg'
+theme.wall_2560                = wall_dir .. '/wall_2560.jpg'
+theme.wall_3440                = wall_dir .. '/wall_3440.jpg'
 theme.border_width             = dpi(3)
+theme.border_radius            = dpi(10)
+theme.client_radius            = dpi(12)
 theme.menu_height              = dpi(16)
 theme.menu_width               = dpi(128)
 
