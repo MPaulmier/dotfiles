@@ -35,10 +35,6 @@ parse_virtualenv() {
     pyenv version | tr ' ' '\n' | head -1
 }
 
-cdc() {
-    cd $HOME/coog_dev/workspace_coog_$1
-}
-
 _PROMPT() {
     _EXIT_STATUS=$?
     [ $_EXIT_STATUS != 0 ] && _EXIT_STATUS_STR=" \[\033[38;5;7m\][\[$(tput sgr0)\]\[\033[38;5;9m\]$_EXIT_STATUS\[$(tput sgr0)\]\[\033[38;5;7m\]]\[$(tput sgr0)\]"
