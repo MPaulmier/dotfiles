@@ -11,7 +11,7 @@ theme                          = {}
 theme.wall_1920                = wall_dir .. '/wall_1920.jpg'
 theme.wall_2560                = wall_dir .. '/wall_2560.jpg'
 theme.wall_3440                = wall_dir .. '/wall_3440.jpg'
-theme.border_width             = dpi(3)
+theme.border_width             = dpi(2)
 theme.border_radius            = dpi(10)
 theme.client_radius            = dpi(12)
 theme.menu_height              = dpi(16)
@@ -24,11 +24,12 @@ theme.tooltip_border_width     = dpi(2)
 --}}}
 
 -- Theme fonts {{{
-theme.font                     = "Iosevka Bold 11"
+theme.font                     = "Manjari 12"
+theme.icon_font                = "FontAwesome 11"
 theme.mono_font                = "Iosevka 11"
+
 theme.taglist_font             = theme.mono_font
 theme.tasklist_font            = theme.font
-theme.icon_font                = "FontAwesome 11"
 theme.hotkeys_font             = theme.mono_font
 theme.hotkeys_description_font = theme.font
 --}}}
@@ -53,22 +54,20 @@ theme.magenta2                 = xrdb.color13
 theme.cyan1                    = xrdb.color6
 theme.cyan2                    = xrdb.color14
 theme.white1                   = xrdb.color7
-theme.white2                   = xrdb.color8
-theme.grey1                    = "#1d1d29"
-theme.grey2                    = "#272b34"
+theme.white2                   = xrdb.color15
 
-theme.fg_normal                = "#e2ccb0"
-theme.fg_focus                 = "#d88166"
-theme.fg_urgent                = "#CC9393"
-theme.bg_normal                = "#140c0b"
-theme.bg_focus                 = "#140c0b"
-theme.bg_urgent                = "#2a1f1e"
-theme.border_normal            = "#302627"
-theme.border_focus             = "#c2745b"
-theme.border_marked            = "#CC9393"
-theme.taglist_fg_focus         = "#d88166"
-theme.tasklist_bg_focus        = "#140c0b"
-theme.tasklist_fg_focus        = "#d88166"
+theme.fg_normal                = theme.black1
+theme.fg_focus                 = theme.black2
+theme.fg_urgent                = theme.black1
+theme.bg_normal                = theme.white2
+theme.bg_focus                 = theme.white1
+theme.bg_urgent                = theme.red2
+theme.border_normal            = theme.black1
+theme.border_focus             = theme.green1
+theme.border_marked            = theme.green2
+theme.taglist_fg_focus         = theme.blue1
+theme.tasklist_bg_focus        = theme.white2
+theme.tasklist_fg_focus        = theme.blue1
 theme.gradient_1               = theme.red1
 theme.gradient_2               = theme.blue1
 theme.gradient_3               = theme.blue2
@@ -108,7 +107,8 @@ theme.layout_cornernw          = icons_dir .. "cornernw.png"
 theme.layout_cornerne          = icons_dir .. "cornerne.png"
 theme.layout_cornersw          = icons_dir .. "cornersw.pnf"
 theme.layout_cornerse          = icons_dir .. "cornerse.png"
-theme.layout_centerfair        = lain_icons_dir .. "centerfair.png"
+theme.layout_termfair          = lain_icons_dir .. "termfair.png"
+theme.layout_centerwork        = lain_icons_dir .. "centerwork.png"
 --}}}
 
 return theme

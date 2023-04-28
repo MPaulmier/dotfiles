@@ -69,11 +69,9 @@ beautiful.init(themedir .. "theme.lua")
 
 -- {{{Table of layouts
 awful.layout.layouts = {
-    awful.layout.suit.floating,
-    awful.layout.suit.fair,
+    awful.layout.suit.tile.right,
     awful.layout.suit.spiral,
     awful.layout.suit.max,
-    lain.layout.termfair.center,
 }
 -- }}}
 
@@ -361,13 +359,10 @@ screen.connect_signal("request::desktop_decoration", function(s)
 
         -- Each screen has its own tag table.
         awful.tag(
-            {"home", "work", "web", "emacs" },
+            {"Home", "Work", "Web", "Dev" },
             s,
             {
-                awful.layout.layouts[2],
-                awful.layout.layouts[2],
-                awful.layout.layouts[4],
-                awful.layout.layouts[4]
+                awful.layout.layouts[1],
             }
         )
 
@@ -417,7 +412,7 @@ screen.connect_signal("request::desktop_decoration", function(s)
                 awful.button({ }, 3, function() awful.menu.client_list { theme = { width = 250 } } end),
                 awful.button({ }, 4, function() awful.client.focus.byidx(-1) end),
                 awful.button({ }, 5, function() awful.client.focus.byidx( 1) end),
-            }
+            },
         }
 
         -- Create the wibox
@@ -425,8 +420,7 @@ screen.connect_signal("request::desktop_decoration", function(s)
             position = "top",
             screen = s,
             widget = wibox.container.margin,
-            margins = 5,
-            height = 20,
+            height = 25,
             widget = {
                 layout = wibox.layout.align.horizontal,
                 { -- Left widgets
@@ -519,9 +513,9 @@ awful.keyboard.append_global_keybindings {
         {description = "increase the number of master clients", group = "layout"}),
     awful.key({ modkey, "Shift"   }, "l",     function () awful.tag.incnmaster(-1, nil, true) end,
         {description = "decrease the number of master clients", group = "layout"}),
-    awful.key({ modkey, "Control" }, "h",     function () awful.tag.incncol( 1, nil, true)    end,
+    awful.key({ modkey, "Control" }, "h",     function () awful.tag.incmwfact( 1, nil)    end,
         {description = "increase the number of columns", group = "layout"}),
-    awful.key({ modkey, "Control" }, "l",     function () awful.tag.incncol(-1, nil, true)    end,
+    awful.key({ modkey, "Control" }, "l",     function () awful.tag.incmwfact(-1, nil)    end,
         {description = "decrease the number of columns", group = "layout"}),
     awful.key({ modkey,           }, "space", function () awful.layout.inc( 1)                end,
         {description = "select next", group = "layout"}),
@@ -554,10 +548,10 @@ awful.keyboard.append_global_keybindings {
         end,
         {description = "lua execute prompt", group = "awesome"}),
 
-    awful.key({ modkey }, "i",
+    awful.key({ modkey, "Shift" }, "i",
         function ()
             awful.prompt.run {
-                prompt = "Go to issue: ",
+                prompt = "Go to Remine issue: ",
                 textbox = awful.screen.focused().mypromptbox.widget,
                 exe_callback = function (s)
                     os.execute("firefox --new-tab https://support.coopengo.com/issues/" .. s)
@@ -566,7 +560,18 @@ awful.keyboard.append_global_keybindings {
             }
         end,
         {desciption = "search for issue in coog's redmine", group = "awersome"}),
-
+    awful.key({ modkey }, "i",
+        function ()
+            awful.prompt.run {
+                prompt = "Go to Jira issue: ",
+                textbox = awful.screen.focused().mypromptbox.widget,
+                exe_callback = function (s)
+                    os.execute("firefox --new-tab https://coopengo.atlassian.net/browse/PMETA-" .. s)
+                end,
+                history_path = awful.util.get_cache_dir() .. "/history_issues"
+            }
+        end,
+        {desciption = "search for issue in coog's redmine", group = "awersome"}),
     -- Screen brightness control
     awful.key({}, "XF86MonBrightnessUp",
         function ()
@@ -598,24 +603,23 @@ awful.keyboard.append_global_keybindings {
             volume.notify()
         end,
         {description = "Mute volume", group = "controls"}),
-
-    -- Menubar
-    awful.key({ modkey }, "p", function() menubar.show() end,
-        {description = "show the menubar", group = "launcher"}),
-
-    -- Applications
-    awful.key({ modkey,           }, "e",
-        function () awful.spawn(editor) end,
-        {description = "Emacs", group = "applications"}),
-    awful.key({ modkey,           }, "b",
-        function () awful.spawn.raise_or_spawn(browser) end,
-        {description = "Firefox", group = "applications"}),
-    awful.key({ modkey, "Shift"   }, "t",
-        function () awful.spawn("thunar") end,
-        {description = "Thunar", group = "applications"}),
     awful.key({                   }, "Print",
         function() awful.spawn("flameshot gui") end,
         {description = "Print screen", group = "controls"}),
+
+    -- Launcher
+    awful.key({ modkey }, "p", function() menubar.show() end,
+        {description = "show the menubar", group = "launcher"}),
+
+    awful.key({ modkey,           }, "e",
+        function () awful.spawn(editor) end,
+        {description = "Emacs", group = "launcher"}),
+    awful.key({ modkey,           }, "b",
+        function () awful.spawn.raise_or_spawn(browser) end,
+        {description = "Firefox", group = "launcher"}),
+    awful.key({ modkey, "Shift"   }, "t",
+        function () awful.spawn("thunar") end,
+        {description = "Thunar", group = "launcher"}),
 }
 
 awful.keyboard.append_global_keybindings({
@@ -776,6 +780,8 @@ ruled.client.connect_signal("request::rules", function()
                     class = {
                         "Arandr",
                         "Nm-connection-editor",
+                        "Gcr-prompter",
+                        "Pavucontrol"
                     },
                     name = {
                         "Event Tester",
@@ -792,8 +798,7 @@ ruled.client.connect_signal("request::rules", function()
                 id = "emacs",
                 rule = { class = "Emacs" },
                 properties = {
-                    tag = "emacs",
-                    switchtotag = true,
+                    tag = "Dev",
                 }
             },
 
@@ -807,7 +812,7 @@ ruled.client.connect_signal("request::rules", function()
                     }
                 },
                 properties = {
-                    tag = "web"
+                    tag = "Web"
                 }
             },
 
@@ -841,6 +846,7 @@ end)
 
 client.connect_signal("focus", function(c) c.border_color = beautiful.border_focus end)
 client.connect_signal("unfocus", function(c) c.border_color = beautiful.border_normal end)
+client.connect_signal("tagged", function(c) ruled.client.apply(c) end)
 -- }}}
 
 -- {{{ Notifications
