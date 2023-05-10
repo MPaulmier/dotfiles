@@ -620,6 +620,9 @@ awful.keyboard.append_global_keybindings {
     awful.key({ modkey,           }, "e",
         function () awful.spawn(editor) end,
         {description = "Emacs", group = "launcher"}),
+    awful.key({ modkey, "Control" }, "e",
+        function () awful.spawn("emacsclient -F '((name . \"Emacs Everywhere\"))' --eval '(emacs-everywhere)'") end,
+        {description = "Emacs", group = "launcher"}),
     awful.key({ modkey,           }, "b",
         function () awful.spawn.raise_or_spawn(browser) end,
         {description = "Firefox", group = "launcher"}),
@@ -801,11 +804,20 @@ ruled.client.connect_signal("request::rules", function()
 
             -- Emacs
             {
+                id = "emacs-everywhere",
+                rule = { name = "emacs-everywhere" },
+                properties = {
+                    floating = true,
+                    placement = awful.placement.centered,
+                },
+            },
+            {
                 id = "emacs",
                 rule = { class = "Emacs" },
+                except = { name = "emacs-everywhere" },
                 properties = {
                     tag = "Dev",
-                }
+                },
             },
 
             -- Web
