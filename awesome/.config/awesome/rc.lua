@@ -603,6 +603,12 @@ awful.keyboard.append_global_keybindings {
             volume.notify()
         end,
         {description = "Mute volume", group = "controls"}),
+    awful.key({}, "XF86AudioPlay",
+        function ()
+            os.execute("playerctl play-pause")
+            volume.notify()
+        end,
+        {description = "Pause or play sound in browser", group = "controls"}),
     awful.key({                   }, "Print",
         function() awful.spawn("flameshot gui") end,
         {description = "Print screen", group = "controls"}),
