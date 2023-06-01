@@ -22,7 +22,6 @@ alias tree="tree -C"
 alias u="echo -ne \"\007\""
 alias rpdb="rlwrap nc 0 4444"
 
-# Prompt (from <http://dotshare.it/dots/1143/>)
 # Check for an interactive session
 [ -z "$PS1" ] && return
 
