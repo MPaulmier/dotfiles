@@ -622,7 +622,7 @@ awful.keyboard.append_global_keybindings {
         {description = "Emacs", group = "launcher"}),
     awful.key({ modkey, "Control" }, "e",
         function () awful.spawn("emacsclient -F '((name . \"Emacs Everywhere\"))' --eval '(emacs-everywhere)'") end,
-        {description = "Emacs", group = "launcher"}),
+        {description = "Emacs Everywhere", group = "launcher"}),
     awful.key({ modkey,           }, "b",
         function () awful.spawn.raise_or_spawn(browser) end,
         {description = "Firefox", group = "launcher"}),
@@ -777,8 +777,8 @@ ruled.client.connect_signal("request::rules", function()
                     keys = clientkeys,
                     buttons = clientbuttons,
                     screen = awful.screen.preferred,
-                    placement = awful.placement.no_overlap+awful.placement.no_offscreen
-                }
+                    placement = awful.placement.no_overlap+awful.placement.no_offscreen,
+                },
             },
 
             -- Floating clients.
@@ -790,7 +790,7 @@ ruled.client.connect_signal("request::rules", function()
                         "Arandr",
                         "Nm-connection-editor",
                         "Gcr-prompter",
-                        "Pavucontrol"
+                        "Pavucontrol",
                     },
                     name = {
                         "Event Tester",
@@ -798,7 +798,7 @@ ruled.client.connect_signal("request::rules", function()
                 },
                 properties = {
                     floating = true,
-                    placement = awful.placement.centered
+                    placement = awful.placement.centered,
                 }
             },
 
@@ -827,11 +827,11 @@ ruled.client.connect_signal("request::rules", function()
                     instance = {
                         "Navigator",
                         "google-chrome",
-                    }
+                    },
                 },
                 properties = {
-                    tag = "Web"
-                }
+                    tag = "Web",
+                },
             },
 
             -- Tryton
@@ -839,9 +839,10 @@ ruled.client.connect_signal("request::rules", function()
                 id = "tryton",
                 rule = { class = "Tryton" },
                 properties = {
-                    size_hints_honor = true
-                }
-            }
+                    size_hints_honor = true,
+                },
+            },
+            },
         }
 end)
 -- }}}
