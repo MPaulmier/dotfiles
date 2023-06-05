@@ -842,6 +842,15 @@ ruled.client.connect_signal("request::rules", function()
                     size_hints_honor = true,
                 },
             },
+
+            -- KDE connect
+            {
+                id = "SMS",
+                rule = { class = "kdeconnect.sms" },
+                properties = {
+                    floating = true,
+                    placement = awful.placement.centered,
+                },
             },
         }
 end)
