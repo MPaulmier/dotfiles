@@ -110,3 +110,44 @@ if [ -d "$HOME/.pyenv" ]; then
     eval "$(pyenv init -)"
     eval "$(pyenv virtualenv-init -)"
 fi
+
+# Configurations related to work
+if [ -e "$HOME/.workrc" ]; then
+    source ~/.workrc
+fi
+
+#######
+# FZF #
+#######
+
+alias fd="fdfind"
+# Activate auto completion
+FZF_COMPLETION_FILE=/usr/share/doc/fzf/examples/completion.bash
+[[ -f $FZF_COMPLETION_FILE ]] && source $FZF_COMPLETION_FILE
+
+FZF_KEY_BINDINGS_FILE=/usr/share/doc/fzf/examples/key-bindings.bash
+[[ -f $FZF_KEY_BINDINGS_FILE ]] && source $FZF_KEY_BINDINGS_FILE
+
+# Options to fzf command
+export FZF_COMPLETION_OPTS='--border --info=inline'
+
+# Use fd (https://github.com/sharkdp/fd) instead of the default find
+# command for listing path candidates.
+# - The first argument to the function ($1) is the base path to start traversal
+# - See the source code (completion.{bash,zsh}) for the details.
+_fzf_compgen_path() {
+    fd --hidden --follow --exclude ".git" . "$1"
+}
+
+# Use fd to generate the list for directory completion
+_fzf_compgen_dir() {
+    fd --type d --hidden --follow --exclude ".git" . "$1"
+}
+
+# Roswell
+export PATH=$PATH:~/.roswell/bin
+
+# Completions
+if command -v direnv; then
+    eval "$(direnv hook bash)" &> /dev/null
+fi
