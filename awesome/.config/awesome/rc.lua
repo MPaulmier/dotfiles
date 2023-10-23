@@ -724,8 +724,15 @@ client.connect_signal("request::default_keybindings", function()
             {description = "toggle fullscreen", group = "client"}),
         awful.key({ modkey, "Shift"   }, "c",      function (c) c:kill()                         end,
                 {description = "close", group = "client"}),
-        awful.key({ modkey, "Control" }, "space",  awful.client.floating.toggle                     ,
-                {description = "toggle floating", group = "client"}),
+        awful.key({ modkey, "Control" }, "space",  function (c)
+                awful.client.floating.toggle(c)
+                c:geometry {
+                    width = c.screen.geometry.width // 2,
+                    height = (c.screen.geometry.height // 4) * 3,
+                }
+                awful.placement.centered(c)
+        end,
+                {description = "toggle floating and place client at the center", group = "client"}),
         awful.key({ modkey, "Control" }, "Return", function (c) c:swap(awful.client.getmaster()) end,
                 {description = "move to master", group = "client"}),
         awful.key({ modkey,           }, "o",      function (c) c:move_to_screen()               end,
