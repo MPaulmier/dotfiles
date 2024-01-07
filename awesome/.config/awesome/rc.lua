@@ -54,7 +54,7 @@ userdir = home .. "/.config/awesome/"
 themedir = userdir .. "/themes/custom/"
 wall_dir = home .. "/Images/wallpapers/"
 
-terminal = "urxvt"
+terminal = "alacritty"
 editor = "emacsclient -c"
 
 modkey = "Mod4"
