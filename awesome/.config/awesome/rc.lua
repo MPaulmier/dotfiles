@@ -930,7 +930,6 @@ end)
 -- {{{ Autostart
 awful.spawn("killall compton")
 awful.spawn("compton")
-awful.spawn("emacs --daemon")
 awful.spawn("nm-applet")
 awful.spawn("blueman-applet")
 -- }}}
