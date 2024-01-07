@@ -764,6 +764,30 @@ client.connect_signal("request::default_keybindings", function()
                 c:raise()
             end ,
             {description = "(un)maximize horizontally", group = "client"}),
+        awful.key({ modkey,           }, "$", function (c)
+                local s = c.screen
+                s.padding = {
+                    left   = math.max(0, s.padding.left - 10),
+                    right  = math.max(0, s.padding.right - 10),
+                    top    = math.max(0, s.padding.top - 10),
+                    bottom = math.max(0, s.padding.bottom - 10),
+                }
+        end,
+            {description = "Increase global padding", group = "client"}),
+        awful.key({ modkey,           }, "=", function (c)
+                local s = c.screen
+                s.padding = {
+                    left   = math.min(300, s.padding.left + 10),
+                    right  = math.min(300, s.padding.right + 10),
+                    top    = math.min(300, s.padding.top + 10),
+                    bottom = math.min(300, s.padding.bottom + 10),
+                }
+        end,
+            {description = "Decrease global padding", group = "client"}),
+        awful.key({ modkey, "Shift"   }, "=", function (c) awful.tag.incgap(10, c.tag) end ,
+            {description = "Increase useless gap", group = "client"}),
+        awful.key({ modkey, "Shift"   }, "$", function (c) awful.tag.incgap(-10, c.tag) end,
+            {description = "Decrease useless gap", group = "client"}),
     })
 end)
 -- }}}
