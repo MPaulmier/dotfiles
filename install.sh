@@ -1,5 +1,12 @@
 #!/bin/sh
 
+# This is done so that the .config directory is an actual directory on the file
+# system and not a symlink to my awesomewm config which would make all the files
+# created under this directory part of this repo.
+if [ ! -d "$HOME/.config/" ]; then
+    mkdir -p $HOME/.config/
+fi
+
 stow bash
 stow git
 stow x-system
