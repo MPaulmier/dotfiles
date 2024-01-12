@@ -795,6 +795,12 @@ end)
 -- {{{ Rules
 -- Rules to apply to new clients (through the "manage" signal).
 ruled.client.connect_signal("request::rules", function()
+        ruled.client.append_rule {
+            id         = "titlebars",
+            rule_any   = { type = { "normal", "dialog" } },
+            properties = { titlebars_enabled = true      }
+        }
+
         ruled.client.append_rules {
             -- All clients will match this rule.
             {
