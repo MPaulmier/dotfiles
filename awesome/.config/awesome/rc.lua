@@ -732,7 +732,13 @@ client.connect_signal("request::default_keybindings", function()
                 }
                 awful.placement.centered(c)
         end,
-                {description = "toggle floating and place client at the center", group = "client"}),
+            {description = "toggle floating and place client at the center", group = "client"}),
+        awful.key({ modkey,  }, "c",  function (c)
+                if c.floating then
+                    awful.placement.centered(c)
+                end
+        end,
+                {description = "center floating client", group = "client"}),
         awful.key({ modkey, "Control" }, "Return", function (c) c:swap(awful.client.getmaster()) end,
                 {description = "move to master", group = "client"}),
         awful.key({ modkey,           }, "o",      function (c) c:move_to_screen()               end,
@@ -843,6 +849,15 @@ ruled.client.connect_signal("request::rules", function()
             {
                 id = "emacs-everywhere",
                 rule = { name = "emacs-everywhere" },
+                properties = {
+                    floating = true,
+                    placement = awful.placement.centered,
+                    transient_for = root,
+                },
+            },
+            {
+                id = "ediff",
+                rule = { name = "Ediff" },
                 properties = {
                     floating = true,
                     placement = awful.placement.centered,
