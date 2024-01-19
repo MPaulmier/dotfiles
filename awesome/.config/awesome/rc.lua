@@ -585,6 +585,24 @@ awful.keyboard.append_global_keybindings {
             volume.notify()
         end,
         {description = "Pause or play sound in browser", group = "controls"}),
+    awful.key({}, "XF86AudioPause",
+        function ()
+            os.execute("playerctl pause")
+            volume.notify()
+        end,
+        {description = "Pause or play sound in browser", group = "controls"}),
+    awful.key({}, "XF86AudioNext",
+        function ()
+            os.execute("playerctl position 5+")
+            volume.notify()
+        end,
+        {description = "Order player to go forward 5 seconds", group = "controls"}),
+    awful.key({}, "XF86AudioPrev",
+        function ()
+            os.execute("playerctl position 5-")
+            volume.notify()
+        end,
+        {description = "Order player to go backwards 5 seconds", group = "controls"}),
     awful.key({                   }, "Print",
         function() awful.spawn("flameshot gui") end,
         {description = "Print screen", group = "controls"}),
