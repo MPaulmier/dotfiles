@@ -120,6 +120,10 @@ fi
 # FZF #
 #######
 
+if [ -f /usr/share/bash-completion/completions/fzf ]; then
+    source /usr/share/bash-completion/completions/fzf
+fi
+
 alias fd="fdfind"
 # Activate auto completion
 FZF_COMPLETION_FILE=/usr/share/doc/fzf/examples/completion.bash
