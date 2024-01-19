@@ -548,30 +548,6 @@ awful.keyboard.append_global_keybindings {
         end,
         {description = "lua execute prompt", group = "awesome"}),
 
-    awful.key({ modkey, "Shift" }, "i",
-        function ()
-            awful.prompt.run {
-                prompt = "Go to Remine issue: ",
-                textbox = awful.screen.focused().mypromptbox.widget,
-                exe_callback = function (s)
-                    os.execute("firefox --new-tab https://support.coopengo.com/issues/" .. s)
-                end,
-                history_path = awful.util.get_cache_dir() .. "/history_issues"
-            }
-        end,
-        {desciption = "search for issue in coog's redmine", group = "awersome"}),
-    awful.key({ modkey }, "i",
-        function ()
-            awful.prompt.run {
-                prompt = "Go to Jira issue: ",
-                textbox = awful.screen.focused().mypromptbox.widget,
-                exe_callback = function (s)
-                    os.execute("firefox --new-tab https://coopengo.atlassian.net/browse/PMETA-" .. s)
-                end,
-                history_path = awful.util.get_cache_dir() .. "/history_issues"
-            }
-        end,
-        {desciption = "search for issue in coog's redmine", group = "awersome"}),
     -- Screen brightness control
     awful.key({}, "XF86MonBrightnessUp",
         function ()
