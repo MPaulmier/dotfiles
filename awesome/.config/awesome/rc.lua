@@ -784,9 +784,9 @@ client.connect_signal("request::default_keybindings", function()
                 }
         end,
             {description = "Decrease global padding", group = "client"}),
-        awful.key({ modkey, "Shift"   }, "=", function (c) awful.tag.incgap(10, c.tag) end ,
+        awful.key({ modkey, "Shift"   }, "=", function (c) awful.tag.incgap(5, c.tag) end ,
             {description = "Increase useless gap", group = "client"}),
-        awful.key({ modkey, "Shift"   }, "$", function (c) awful.tag.incgap(-10, c.tag) end,
+        awful.key({ modkey, "Shift"   }, "$", function (c) awful.tag.incgap(-5, c.tag) end,
             {description = "Decrease useless gap", group = "client"}),
     })
 end)
