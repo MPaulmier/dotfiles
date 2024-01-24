@@ -38,3 +38,17 @@ fi
 if [[ -z $DISPLAY ]] && [[ $(tty) = /dev/tty1 ]]; then
     startx
 fi
+
+# ASDF depending on system and installation means <> in order
+# Git install => arch && macos
+# Pacman install => arch
+# Homebrew => macos
+if [ -f "$HOME/.asdf/asdf.sh" ]; then
+    . "$HOME/.asdf/asdf.sh"
+    . "$HOME/.asdf/completions/asdf.bash"
+elif [ -d /opt/asdf-vm/ ]; then
+    . /opt/asdf-vm/asdf.sh
+elif brew list asdf &> /dev/null; then
+    . "$(brew --prefix asdf)/libexec/asdf.sh"
+    . "$(brew --prefix asdf)/etc/bash_completion.d/asdf.bash"
+fi
