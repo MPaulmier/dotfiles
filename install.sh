@@ -8,6 +8,7 @@ if [ ! -d "$HOME/.config/" ]; then
 fi
 
 stow bash
+stow zsh
 stow git
 stow x-system
 stow awesome
@@ -18,9 +19,13 @@ ln -t $HOME/.bin bin/*
 # Write git config with env variables
 # Needs $NAME and $EMAIL to be set
 
-echo "[commit]
-	template = ~/.gitmessage
+if [ ! -f "$HOME/.gitconfig" ]; then
+
+    echo "[commit]
+    template = ~/.gitmessage
+    gpgsign = true
 [user]
 	name = $NAME
 	email = $EMAIL
-" >> $HOME/.gitconfig
+" > $HOME/.gitconfig
+fi

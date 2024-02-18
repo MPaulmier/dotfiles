@@ -10,6 +10,8 @@
 
 # if running bash
 if [ -n "$BASH_VERSION" ]; then
+    # For macos (see https://support.apple.com/en-us/102360)
+    export BASH_SILENCE_DEPRECATION_WARNING=1
     # include .bashrc if it exists
     if [ -f "$HOME/.bashrc" ]; then
 	. "$HOME/.bashrc"
@@ -46,9 +48,13 @@ fi
 if [ -f "$HOME/.asdf/asdf.sh" ]; then
     . "$HOME/.asdf/asdf.sh"
     . "$HOME/.asdf/completions/asdf.bash"
-elif [ -d /opt/asdf-vm/ ]; then
-    . /opt/asdf-vm/asdf.sh
+elif [ -d "/opt/asdf-vm/" ]; then
+    . "/opt/asdf-vm/asdf.sh"
 elif brew list asdf &> /dev/null; then
     . "$(brew --prefix asdf)/libexec/asdf.sh"
     . "$(brew --prefix asdf)/etc/bash_completion.d/asdf.bash"
+fi
+
+if [[ -z $DISPLAY ]] && [[ $(tty) = /dev/tty1 ]]; then
+    startx
 fi
